@@ -1,0 +1,64 @@
+<% layout('layouts/boilerplate') %>
+    <div class="container cont-shadow mt-5">
+        <h2 class="mb-4">Edit Your Listing</h2>
+        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="row g-3 needs-validation mx-auto" style="max-width: 600px;" novalidate>
+            
+            <div class="col-md-12">
+                <label for="title" class="form-label" style="margin-left: 15px;">Title:</label>
+                <input type="text" class="form-control" id="title" name="listing[title]" placeholder="Enter title" value="<%= listing.title %>" required style="border-radius: 50px; padding-left: 15px;">
+                <div class="invalid-feedback">
+                    Please provide a title.
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="description" class="form-label" style="margin-left: 15px;">Description:</label>
+                <textarea id="description" class="form-control" name="listing[description]" placeholder="Write your description..." required style="border-radius: 50px; padding-left: 15px;"><%= listing.description %></textarea>
+                <div class="invalid-feedback">
+                    Please provide a description.
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="image" class="form-label" style="margin-left: 15px;">Image URL:</label>
+                <input type="text" class="form-control" id="image" name="listing[image]" placeholder="Enter image URL" value="<%= listing.image %>" required style="border-radius: 50px; padding-left: 15px;">
+                <div class="invalid-feedback">
+                    Please provide a valid image URL.
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="price" class="form-label" style="margin-left: 15px;">Price:</label>
+                <input type="number" class="form-control" id="price" name="listing[price]" placeholder="e.g., ₹1,000" value="<%= listing.price %>" required style="border-radius: 50px; padding-left: 15px;">
+                <div class="invalid-feedback">
+                    Please provide a price.
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="country" class="form-label" style="margin-left: 15px;">Country:</label>
+                <input type="text" class="form-control" id="country" name="listing[country]" placeholder="e.g., India" value="<%= listing.country %>" required style="border-radius: 50px; padding-left: 15px;">
+                <div class="invalid-feedback">
+                    Please provide a country.
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="location" class="form-label" style="margin-left: 15px;">Location:</label>
+                <input type="text" class="form-control" id="location" name="listing[location]" placeholder="e.g., Chandni Chowk, Delhi" value="<%= listing.location %>" required style="border-radius: 50px; padding-left: 15px;">
+                <div class="invalid-feedback">
+                    Please provide a location.
+                </div>
+            </div>
+
+            <!-- Button with fully rounded corners, smaller width, and centered -->
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary" style="background-color: #FF385C; border-color: #FF385C; border-radius: 50px; width: 180px;">Update</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional but recommended) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

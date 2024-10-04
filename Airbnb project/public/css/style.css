@@ -1,0 +1,90 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh !important;
+    overflow-x:hidden;
+    
+}
+.content{
+    flex: 1;
+}
+/* header */
+.navbar{
+    background-color: #ffe1e7b0 ;
+    backdrop-filter: blur(15px);
+    width: 100%;
+}
+.navbar-nav svg{
+    height: 30px;
+}
+/*------------------------------ body ------------------------------*/
+.all-listings{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1800px;
+    justify-content: center;
+}
+.card{
+    margin: 1rem;
+    margin-bottom: 2.4rem;
+    border: none;
+    text-decoration: none;
+    transition: 200ms;
+    & img{
+        /* Width: 18.5rem; */
+        border-radius: 10px;
+        Height: 17rem;
+        object-fit: cover;
+    transition: 100ms;
+
+    }
+    &:hover{
+        transform: scale(100.5%);
+        & img{
+        transform: translateY(-3px);
+        box-shadow: 0 6px 5px rgba(0, 0, 0, 0.356) ;
+    }
+    }
+}
+.card-body{
+    padding: 1rem 0;
+}
+#heading{
+    padding: 3rem 8%;
+}
+/*------------------------------ footer ------------------------------*/
+.f-info{
+    width: 100vw;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffe1e7b0 !important;
+    backdrop-filter: blur(15px);
+}
+.f-info-links a{
+    color: rgb(44, 44, 44);
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+.f-info-links{
+    width: 100%;
+    text-align: center;
+}
+
+.f-info-socials i{
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info{
+    text-align: center;
+    height: 8rem;
+    background-color: #fff;
+    font-weight: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: space-evenly;
+}

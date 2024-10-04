@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <path
+                            d="M84 8c-3.26.058-6.975 1.965-10 5L54 33l-36-9-8 9 30 14-10 10-14-2-8 8 19 10 10 19 8-8-2-14 10-10 14 30 8.625-8.125L67 46l20-21c3.49-3.502 5-6.13 5-9 0-4.336-3.396-8-8-8z"
+                            fill="#FF385C" overflow="visible" style="marker:none" />
+                    </svg> &nbsp home</a>
+                <a class="nav-link" href="/listings">All Listings</a>
+                <a class="nav-link" href="/listings/new"><i class="fa-solid fa-plus"></i> Add new</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <%if(!currUser){%>
+                    <a class="nav-link" href="/login"><i class="fa-solid fa-user"></i></i> login</a>
+                    <a class="nav-link" href="/login"><i class="fa-solid fa-grip-lines-vertical"></i></a>
+                    <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i> new account</a>
+                <%}%>
+                <%if(currUser){%>
+                    <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i></i> logout</a>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,272 @@
+<% layout('layouts/boilerplate') %>
+
+        <div class="container mt-5">
+            <div class="listing-image">
+                <img src="<%= listing.image %>" alt="Listing image" class="img-fluid rounded">
+            </div>
+
+            <!-- price, description , edit/delete section  -->
+            <div class="details">
+                <div class="listing-content mt-4">
+                    <h2 class="listing-title">
+                        <%= listing.title %>
+                    </h2>
+                    <p class="listing-description text-muted">
+                        <%= listing.description %>
+                    </p>
+
+                    <div class="listing-info">
+                        <p class="listing-price">Price: &#8377;<%= listing.price.toLocaleString("en-IN") %>
+                        </p>
+                        <p class="listing-location">Location: <%= listing.location %>, <%= listing.country %>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="listing-actions d-flex justify-content-center mt-4">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-primary">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </a>
+                    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline-block">
+                        <button class="btn btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+            <hr>
+
+            <!-- Steps Info Section -->
+            <div class="steps-info">
+                <div class="info-block">
+                    <i class="fa-regular fa-envelope"></i>
+                    <h3>Request to book</h3>
+                    <p>Choose your dates, add your guests, then answer a question about why you want to go.</p>
+                </div>
+                <div class="info-block">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <h3>Selection process</h3>
+                    <p>We'll randomly choose potential guests and review their answers for unique perspectives and
+                        connections to the icon.</p>
+                </div>
+                <div class="info-block">
+                    <i class="fa-regular fa-address-card"></i>
+                    <h3>Requirements</h3>
+                    <p>You’ll need an active Airbnb account and the app to participate, and be a resident of an eligible
+                        country or region.</p>
+                </div>
+            </div>
+            <hr>
+
+            <!-- Write a review section -->
+            <div class="write-review">
+                
+                <h3> Leave a Review</h3>
+                <form action="/listings/<%=listing.id%>/reviews" method="POST" novalidate class="needs-validation">
+                    <!-- Slider -->
+                    <div class="stars">
+                        <img src="/review.svg" style="width: 150px;" alt="">
+                        <input type="range" min="1" max="5" value="0" name="review[rating]" id="rating"
+                            class="form-range" required oninput="updateRating(this.value)">
+
+                        <!-- Stars Display -->
+                        <div id="star-display" class="star-display mt-2">
+                            <span id="star-output">0 Stars</span>
+                            <span class="stars" id="stars"></span>
+                        </div>
+                    </div>
+
+                    <label for="comment" class="mt-3">Your Comments:</label>
+                    <textarea name="review[comment]" id="comment" rows="5" cols="15" class="form-control"
+                        placeholder="Write your review here..." required></textarea>
+                    <div class="invalid-feedback">Please add comments for review</div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary mt-3 submit-review">Submit Review</button>
+                </form>
+            </div>
+            <hr>
+
+            <!-- Review & Ratings  -->
+            <div class="ratings">
+                <div class="rating-summary d-flex align-items-center">
+                    <div class="rating-container">
+                        <h4>Overall rating</h4>
+                        <div class="rating-bar">
+                            <span>5</span>
+                            <div class="bar">
+                                <div class="fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <span>4</span>
+                            <div class="bar">
+                                <div class="fill" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <span>3</span>
+                            <div class="bar">
+                                <div class="fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <span>2</span>
+                            <div class="bar">
+                                <div class="fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <span>1</span>
+                            <div class="bar">
+                                <div class="fill" style="width: 5%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="warp">
+                        <div class="mr-3">
+                            <h4>Cleanliness</h4>
+                            <p>4.5</p>
+                            <i class="fa-solid fa-spray-can-sparkles"></i>
+                        </div>
+
+                        <div class="mr-3">
+                            <h4>Accuracy</h4>
+                            <p>4.7</p>
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <div class="mr-3">
+                            <h4>Check-in</h4>
+                            <p>4.6</p>
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                    </div>
+                    <div class="warp">
+
+                        <div class="mr-3">
+                            <h4>Interaction</h4>
+                            <p>4.8</p>
+                            <i class="fa-solid fa-message"></i>
+                        </div>
+
+                        <div class="mr-3">
+                            <h4>Location</h4>
+                            <p>4.9</p>
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+
+                        <div class="mr-3">
+                            <h4>Value</h4>
+                            <p>4.4</p>
+                            <i class="fa-solid fa-tag"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-4">
+                    <div class="row">
+                        <% for (let review of listing.reviews) { %>
+                            <div class="col-lg-6 mb-4">
+                                <div class="review-card">
+                                    <div class="align-items-start mb-1">
+                                        <img src="/default_profile.svg" alt="Profile Picture" class="profile-image me-2">
+                                        <div>
+                                            
+                                            <h5 class="mb-0">
+                                                <%= review.name || "Dummy Name" %>
+                                            </h5>
+                                            <span class="text-muted">
+                                                Stayed for a few nights
+                                            </span>
+                                        </div>
+                                        <form method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
+                                            <button class=""><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                    <div class="align-items-center mb-1">
+                                        <div class="star-rating me-1">
+                                            <% for (let i = 1; i <= 5; i++) { %>
+                                                <% if (i <= review.rating) { %>
+                                                    <i class="fa-solid fa-star text-warning" style="font-size: 1rem;"></i>
+                                                <% } else { %>
+                                                    <i class="fa-regular fa-star text-muted" style="font-size: 1rem;"></i>
+                                                <% } %>
+                                            <% } %>
+                                        </div>
+                                        <span class="text-muted">
+                                            <%= review.stayDuration || "1 week ago" %>
+                                        </span>
+                                    </div>
+                                    <p class="review-comment text-muted mb-0">
+                                        <%= review.comment || "This is a dummy review comment." %>
+                                    </p>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                
+            </div>
+
+            <hr>
+
+            <!-- Terms Section -->
+            <div class="terms">
+                <p>If selected and you decide to book, you'll have 24 hours to complete the purchase. Travel costs are
+                    not included. Read the <a href="#">full rules</a>.</p>
+            </div>
+
+            <hr>
+
+            <!-- Things to Know Section -->
+            <div class="things-to-know">
+                <h3>Things to know</h3>
+                <div class="details">
+                    <div>
+                        <h4>The basics</h4>
+                        <p>Check-in after 6:00 pm</p>
+                        <p>Checkout before 1:00 am</p>
+                        <p>2 guests maximum</p>
+                        <a href="#">Show more</a>
+                    </div>
+                    <div>
+                        <h4>Safety & property</h4>
+                        <p>Exterior security cameras on property</p>
+                        <p>Carbon monoxide alarm</p>
+                        <p>Smoke alarm</p>
+                        <a href="#">Show more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS and dependencies -->
+        <script>
+            function updateRating(value) {
+                const starOutput = document.getElementById('star-output');
+                const starsContainer = document.getElementById('stars');
+                const slider = document.getElementById('rating');  // Get the slider element
+
+                // Update the star output text
+                starOutput.textContent = value + " Stars";
+
+                // Update stars display
+                starsContainer.innerHTML = '';
+                for (let i = 1; i <= value; i++) {
+                    starsContainer.innerHTML += '★'; // Add a filled star
+                }
+                for (let i = value + 1; i <= 5; i++) {
+                    starsContainer.innerHTML += '☆'; // Add an empty star
+                }
+
+                // Update slider fill color
+                const max = slider.max;
+                const percentage = ((value - 1) / 4) * 100;
+                slider.style.setProperty('--value', `${percentage}%`);
+            }
+
+        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
